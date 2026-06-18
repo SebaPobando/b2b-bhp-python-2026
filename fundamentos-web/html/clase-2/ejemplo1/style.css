@@ -1,0 +1,63 @@
+/* h1 {
+    color: red;
+}
+
+.hola {
+    color: green;
+}
+
+#adios {
+    color: pink;
+}
+
+h3 {
+    color: blue;
+}
+
+.caja {
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    margin: 20px 0px 15px 5px;
+}
+
+#rojo {
+    background-color: red;
+}
+
+#verde {
+    background-color: green;
+}
+
+#azul {
+    background-color: blue;
+} */
+
+/* .quote p {
+    color: blue;
+    font-style: italic;
+}
+
+.quote>p {
+    color: tomato;
+} */
+
+
+/* Estilo para los párrafos dentro del contenedor*/
+#container p {
+    font-size: 16px;
+    background-color: #333;
+}
+
+/* Estilo para los párrafos dentro del contenedor*/
+#container p.highlight {
+    font-weight: bold;
+    color: #ff0000;
+    /* Rojo */
+}
+
+#container p {
+    font-weight: bold;
+    color: #ffffff;
+    /* Blanco */
+}
