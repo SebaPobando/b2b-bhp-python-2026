@@ -4,19 +4,24 @@ body{
 
 img{
     border: 3px solid red;
+    width: 150px;
 }
 
 .galeria{
-
+    display: flex;
+    flex-direction: column;
 }
 
 .contenedor-titulo{
     background-color: orange;
-    width: 100%;
 }
 
 .fila-1{
     background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0px;
 }
 
 .fila-2{
