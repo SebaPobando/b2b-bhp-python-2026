@@ -1,0 +1,37 @@
+body{
+    background-color: lightgray;
+}
+
+img{
+    border: 3px solid red;
+    width: 150px;
+}
+
+.galeria{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-titulo{
+    background-color: orange;
+}
+
+.fila-1{
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+
+.fila-2{
+    background-color: aquamarine;
+}
+
+.fila-3{
+    background-color: tomato;
+}
+
+.pie-de-pagina{
+    background-color: greenyellow;
+}

@@ -1,0 +1,17 @@
+/*ETIQUETA*/
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+body{
+    background-color: lightslategrey;
+}
+
+
+.contenedor1 > h3{
+    color: green;
+    font-size: 30px;
+    text-align: center;
+}
