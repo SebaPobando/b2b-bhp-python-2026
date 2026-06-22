@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px;
+}
+
+.contenedor {
+    width: 400px;
+    height: 200px;
+    border: 2px solid black;
+    position: relative;
+    /* Necesario para probar absolute */
+}
+
+.caja {
+    width: 150px;
+    height: 80px;
+    background-color: steelblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Cambia este valor para probar */
+    position: absolute;
+
+    /*
+    Valores posibles:
+    position: static;
+    position: relative;
+    position: absolute;
+    position: fixed;
+    */
+
+    top: 20px;
+    left: 10px;
+}
