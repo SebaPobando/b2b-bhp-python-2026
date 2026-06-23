@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    box-sizing: 0;
+}
+
+body{
+    background-color: lightblue;
+}
+
+.tarjeta{
+    width: 50%;
+    background-color:darkcyan;
+    color: #f3f3f3;
+    padding: 16px;
+    margin: 20px auto;
+    box-shadow: 7px 13px 16px -5px rgba(0,0,0,0.45);
+
+}
+
+.usuario{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.img-y-texto{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.img-y-texto img{
+    width: 32px;
+}
+
+.btn{
+    border-radius: 50%;
+    border: 2px solid rgb(186, 78, 164);
+    color:  rgb(186, 78, 164);
+    background-color: rgba(0, 0, 0, 0);
+    padding: 4px 8px;
+}
+
+.enlace-perfil{
+    margin-top: 40px;
+    text-decoration: none;
+    color: rgb(23, 79, 133);
+}
+
+.bi-check-circle{
+    color: rgb(186, 78, 164);
+    font-size: 22px;
+}
+
+.bi-x-circle{
+    color: rgb(186, 78, 164);
+    font-size: 22px;
+}
