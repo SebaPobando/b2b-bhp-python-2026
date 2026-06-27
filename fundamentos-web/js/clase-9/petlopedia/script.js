@@ -9,5 +9,5 @@ function desaparecer() {
 }
 
 function alerta() {
-    alert("Le diste like!!!")
+    alert("Le diste like!!!");
 }
