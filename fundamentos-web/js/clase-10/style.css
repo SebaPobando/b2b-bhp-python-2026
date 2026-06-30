@@ -13,3 +13,88 @@ header {
     justify-content: center;
     align-items: center;
 }
+
+main {
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    padding: 20px;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.izquierda {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 20%;
+    height: 40vh;
+}
+
+.perfil {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 30vh;
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.perfil>img {
+    height: 150px;
+    width: 150px;
+}
+
+.derecha {
+    display: flex;
+    flex-flow: column wrap;
+    width: 70%;
+    align-items: center;
+    gap: 30px;
+}
+
+.tarjeta {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    background-color: #f3f3f3;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    height: 8vh;
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.likes {
+    display: flex;
+    flex-flow: row wrap;
+    width: 10%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.likes>button {
+    width: 40%;
+    height: 75%;
+    background-color: #ffd700;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+span {
+    font-weight: bold;
+}
