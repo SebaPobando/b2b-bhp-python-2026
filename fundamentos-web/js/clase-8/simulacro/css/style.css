@@ -18,6 +18,8 @@ header{
     padding: 12px 8px;
 }
 
+
+
 .logos{
     display: flex;
     align-items: center;
@@ -100,6 +102,25 @@ nav a{
 
 /* Fin propiedades del navbar */
 
+/* Propiedades de vendidos */
+.vendidos{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.vendidos span{
+    font-weight: 700;
+}
+
+.vendidos select{
+    width: 120px;
+
+}
+/* Fin propiedades de vendidos */
+
+
 /* Propiedades del contenedor de tarjetas */
 
 .tarjetas{
@@ -137,3 +158,22 @@ button > img{
 
 
 /* Fin propiedades del contenedor de tarjetas */
+
+/* Propiedades del footer*/
+footer{
+    background-color: palevioletred;
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer > img{
+    width: 60px;
+}
+
+.iconos-footer{
+    display: flex;
+    gap: 12px;
+
+}
