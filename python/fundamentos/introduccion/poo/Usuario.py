@@ -20,7 +20,7 @@ class Usuario:
         print(f"Saldo a pagar: ${self.tarjeta.saldo_pagar}")
         return self
     
-seba = Usuario("Sebastián", "seba@gmail.com")
+seba = Usuario("Sebastián", "Poblete", "spoblete@skillnest.com")
 
 seba.hacer_compra(1000, 0).hacer_compra(2500, 1).hacer_compra(300, 2).mostrar_saldo_usuario()
 
