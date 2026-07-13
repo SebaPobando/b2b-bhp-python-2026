@@ -6,16 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js" defer></script>
+    <script src="js/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<<<<<<< HEAD
-    <link
-        href="https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tirra:wght@400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tirra:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-=======
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
->>>>>>> 698fa80260318a0a3ae9de672289b88814142271
+
 </head>
 
 <body>
@@ -45,18 +42,18 @@
         </section>
 
         <section class="carrito">
-            <h3>5</h3>
+            <h3 id="cantidad">5</h3>
             <img src="images/carrito-1.png" alt="carrito de compras">
         </section>
     </nav>
 
     <main>
         <section class="vendidos">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>157 Muñecas, orden: <span id="orden">Más vendidas</span></p>
             <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+                <option value="Más Vendidas">Más vendidas</option>
+                <option value="Precio">Precio</option>
+                <option value="Puntuación">Puntuación</option>
             </select>
         </section>
 
@@ -64,40 +61,40 @@
             <figure class="tarjeta">
                 <img src="images/mexicana.jpg" alt="muñeca mexicana">
                 <p>Muñeca Mexicana</p>
-                <button>
+                <button class="btn-agregar">
                     <img src="images/carrito-2.png" alt="agregar al carrito">
                 </button>
             </figure>
             <figure class="tarjeta">
                 <img src="images/china.jpg" alt="muñeca china">
                 <p>Muñeca china</p>
-                <button>
+                <button class="btn-agregar">
                     <img src="images/carrito-2.png" alt="agregar al carrito">
                 </button>
             </figure>
             <figure class="tarjeta">
                 <img src="images/africana.jpg" alt="">
                 <p>Muñeca africana</p>
-                <button>
+                <button class="btn-agregar">
                     <img src="images/carrito-2.png" alt="agregar al carrito">
                 </button>
             </figure>
             <figure class="tarjeta">
                 <img src="images/holandesa.jpg" alt="">
                 <p>Muñeca holandesa</p>
-                <button>
+                <button class="btn-agregar">
                     <img src="images/carrito-2.png" alt="agregar al carrito">
                 </button>
             </figure>
         </section>
 
         <footer>
-            <img src="" alt="">
-            <section>
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
+            <img src="images/logo.png" alt="logo mundo muñecas">
+            <section class="iconos-footer">
+                <img src="images/info.png" alt="información">
+                <img src="images/email.png" alt="correo">
+                <img src="images/telefono-2.png" alt="teléfono">
+                <img id="pregunta" src="images/preguntas.png" alt="preguntas">
             </section>
         </footer>
     </main>
