@@ -6,6 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h2>Tabla de países</h2>
+    <table border='1'>
+        <thead>
+            <tr>
+                <th>País</th>
+                <th>Capital</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pais in paises %}
+                <tr>
+                    <td>{{pais['pais']}}</td>
+                    <td>{{pais['capital']}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
