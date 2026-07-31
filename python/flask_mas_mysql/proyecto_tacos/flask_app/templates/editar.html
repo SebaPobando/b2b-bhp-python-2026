@@ -8,20 +8,24 @@
     <title>Formulario de Taco</title>
 </head>
 <body>
+    <nav class="p-3">
+        <a href="/" class="btn btn-info btn-outline-primary">Inicio</a>
+        <a href="/tacos" class="btn btn-outline-success">Todos los tacos</a>
+    </nav>
+
     <form action="/actualizar/{{taco['id']}}" method="post" class="p-3 col-4 mx-auto my-5 border">
         <h2 class="text-center text-primary">Editar taco {{taco['id']}}:</h2>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
             <div class="alert alert-danger" role="alert">
-                <strong>Mensajes FLASH AHHHHHHH!!!!</strong>
                     {% for message in messages %}
-                    <p>{{message}}</p>
+                    <p class="mb-0">{{message}}</p>
                     {% endfor %}
             </div>
             {% endif %}
         {% endwith %}
         <div class="form-group">
-            <label for="name">Tortilla:</label>
+            <label for="tortilla">Tortilla:</label>
             <input type="text" name="tortilla" id="tortilla" class="form-control" value="{{taco['tortilla']}}">
         </div>
         <div class="form-group">
@@ -32,6 +36,17 @@
             <label for="salsa">Salsa:</label>
             <input type="text" name="salsa" id="salsa" class="form-control" value="{{taco['salsa']}}">
         </div>
+        <div class="form-group">
+            <label for="restaurante_id">Restaurante:</label>
+            <select name="restaurante_id" id="restaurante_id" class="form-select" required>
+                {% for restaurante in todos_restaurantes %}
+                <!-- Dejamos preseleccionado el restaurante actual del taco -->
+                <option value="{{restaurante.id}}" {% if restaurante.id == taco.restaurante_id %}selected{% endif %}>{{restaurante.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Actualizar taco" class="btn btn-warning mt-3">
+        <a href="/mostrar/{{taco['id']}}" class="btn btn-secondary mt-3">Cancelar</a>
     </form>
 </body>
 </html>

@@ -8,10 +8,25 @@
     <title>Formulario de Taco</title>
 </head>
 <body>
-    <a href="/tacos" class="btn btn-success">Ver todos los tacos</a>
-    <form action="/crear" method="post" class="p-3 col-4 mx-auto my-5b border">
+    <nav class="p-3">
+        <a href="/tacos" class="btn btn-success">Ver todos los tacos</a>
+        <a href="/restaurantes" class="btn btn-outline-primary">Restaurantes</a>
+        <a href="/complementos" class="btn btn-outline-primary">Complementos</a>
+    </nav>
+
+    <form action="/crear" method="post" class="p-3 col-4 mx-auto my-5 border">
         <h2 class="text-center text-primary">Crear Taco:</h2>
-    
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                <p class="mb-0">{{message}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+
         <div class="form-group">
             <label for="tortilla">Tortilla:</label>
             <input type="text" name="tortilla" id="tortilla" class="form-control">
@@ -24,13 +39,23 @@
             <label for="salsa">Salsa:</label>
             <input type="text" name="salsa" id="salsa" class="form-control">
         </div>
-        <select name="restaurante_id">
-          <!-- Creamos las opciones para que el usuario seleccione un restaurante. -->
-           {% for restaurante in todos_restaurantes %}
-           <!-- El id del restaurante será el valor de la opción -->
-           <option value="{{restaurante.id}}">{{restaurante.nombre}}</option>
-           {% endfor %}
-       </select>
+        <div class="form-group">
+            <label for="restaurante_id">Restaurante:</label>
+            <select name="restaurante_id" id="restaurante_id" class="form-select" required>
+                <!-- Creamos las opciones para que el usuario seleccione un restaurante. -->
+                {% for restaurante in todos_restaurantes %}
+                <!-- El id del restaurante será el valor de la opción -->
+                <option value="{{restaurante.id}}">{{restaurante.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        {% if not todos_restaurantes %}
+        <p class="text-danger mt-2">
+            Primero necesitas <a href="/restaurantes">crear un restaurante</a>.
+        </p>
+        {% endif %}
+
         <input type="submit" value="Crear taco" class="btn btn-primary btn-outline-dark mt-3">
     </form>
 </body>

@@ -1,10 +1,14 @@
 from flask_app import app #Importamos la app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.taco import Taco
+from flask_app.models.restaurante import Restaurante
+from flask_app.models.complemento import Complemento
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    # El formulario necesita la lista de restaurantes para armar el select
+    restaurantes = Restaurante.get_all()
+    return render_template("index.html", todos_restaurantes = restaurantes)
 
 @app.route('/crear',methods=['POST'])
 def crear():
@@ -12,6 +16,7 @@ def crear():
         "tortilla":request.form['tortilla'],
         "guiso": request.form['guiso'],
         "salsa": request.form['salsa'],
+        "restaurante_id": request.form['restaurante_id'],
     }
     Taco.save(datos)
     return redirect('/tacos')
@@ -26,8 +31,12 @@ def detalle(taco_id):
     datos = {
         'id': taco_id
     }
-    taco = Taco.get_one(datos)
-    return render_template("detalle.html",taco = taco)
+    # Traemos el taco con sus complementos y la lista completa para el select
+    taco = Taco.get_taco_con_complementos(datos)
+    if not taco:
+        flash("Ese taco no existe")
+        return redirect('/tacos')
+    return render_template("detalle.html", taco = taco, todos_complementos = Complemento.get_all())
 
 @app.route('/editar/<int:taco_id>')
 def editar(taco_id):
@@ -35,7 +44,10 @@ def editar(taco_id):
         'id': taco_id
     }
     taco = Taco.get_one(datos)
-    return render_template("editar.html", taco = taco)
+    if not taco:
+        flash("Ese taco no existe")
+        return redirect('/tacos')
+    return render_template("editar.html", taco = taco, todos_restaurantes = Restaurante.get_all())
 
 @app.route('/actualizar/<int:taco_id>', methods=['POST'])
 def actualizar(taco_id):
@@ -43,7 +55,8 @@ def actualizar(taco_id):
         'id': taco_id,
         "tortilla":request.form['tortilla'],
         "guiso": request.form['guiso'],
-        "salsa": request.form['salsa']
+        "salsa": request.form['salsa'],
+        "restaurante_id": request.form['restaurante_id'],
     }
     Taco.update(datos)
     return redirect(f"/mostrar/{taco_id}")

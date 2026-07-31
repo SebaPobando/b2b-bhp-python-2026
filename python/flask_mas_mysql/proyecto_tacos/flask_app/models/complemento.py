@@ -13,18 +13,58 @@ class Complemento:
 
    @classmethod
    def save(cls, datos):
-       query = "INSERT INTO complementos (nombre_complemento) VALUES (%(nombre_complemento)s)"
+       query = "INSERT INTO complementos (nombre_complemento) VALUES (%(nombre_complemento)s);"
        return connectToMySQL('esquema_tacos').query_db(query, datos)
+
+   @classmethod
+   def get_all(cls):
+       query = "SELECT * FROM complementos;"
+       complementos_en_db = connectToMySQL('esquema_tacos').query_db(query)
+       complementos = []
+       if complementos_en_db:
+           for complemento in complementos_en_db:
+               complementos.append(cls(complemento))
+       return complementos
+
+   @classmethod
+   def get_one(cls, datos):
+       query = "SELECT * FROM complementos WHERE id = %(id)s;"
+       resultados = connectToMySQL('esquema_tacos').query_db(query, datos)
+       if not resultados:
+           return None
+       return cls(resultados[0])
+
+   @classmethod
+   def delete(cls, datos):
+       query = "DELETE FROM complementos WHERE id = %(id)s;"
+       return connectToMySQL('esquema_tacos').query_db(query, datos)
+
+   # Muchos a muchos: creamos la fila en la tabla intermedia
+   @classmethod
+   def agregar_a_taco(cls, datos):
+       query = "INSERT INTO complementos_en_tacos (taco_id, complemento_id) VALUES (%(taco_id)s, %(complemento_id)s);"
+       return connectToMySQL('esquema_tacos').query_db(query, datos)
+
+   # Muchos a muchos: eliminamos la fila de la tabla intermedia
+   @classmethod
+   def quitar_de_taco(cls, datos):
+       query = "DELETE FROM complementos_en_tacos WHERE taco_id = %(taco_id)s AND complemento_id = %(complemento_id)s;"
+       return connectToMySQL('esquema_tacos').query_db(query, datos)
+
    #Recibimos en un diccionario el id del complemento que queremos consultar
    #El método recupera un complemento específico con los tacos asociados a él
-
    @classmethod
    def get_complementos_y_tacos(cls, datos):
        query = "SELECT * FROM complementos LEFT JOIN complementos_en_tacos ON complementos_en_tacos.complemento_id = complementos.id LEFT JOIN tacos ON complementos_en_tacos.taco_id = tacos.id WHERE complementos.id = %(id)s;"
        # los resultados serán una lista de diccionarios con la información del complemento y los tacos adjuntos a cada fila
        resultados = connectToMySQL('esquema_tacos').query_db(query, datos)
+       if not resultados:
+           return None
        complemento = cls(resultados[0])
        for fila_en_db in resultados:
+           #Si el complemento todavía no está en ningún taco, esas columnas vienen en NULL
+           if fila_en_db['tacos.id'] is None:
+               break
            #Ahora parseamos los datos del taco para generar instancias de Taco y agregarlas a la lista
            datos_taco = {
                "id": fila_en_db['tacos.id'],
@@ -33,6 +73,7 @@ class Complemento:
                "salsa": fila_en_db['salsa'],
                "created_at": fila_en_db['tacos.created_at'],
                "updated_at": fila_en_db['tacos.updated_at'],
+               "restaurante_id": fila_en_db['restaurante_id'],
            }
            complemento.en_tacos.append( taco.Taco(datos_taco)  )
        return complemento

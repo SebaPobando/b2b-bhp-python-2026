@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Restaurantes</title>
+</head>
+<body>
+    <nav class="p-3">
+        <a href="/" class="btn btn-info btn-outline-primary">Inicio</a>
+        <a href="/tacos" class="btn btn-outline-success">Todos los tacos</a>
+        <a href="/complementos" class="btn btn-outline-primary">Complementos</a>
+    </nav>
+
+    <form action="/restaurantes/crear" method="post" class="p-3 col-4 mx-auto my-4 border">
+        <h2 class="text-center text-primary">Crear Restaurante:</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                <p class="mb-0">{{message}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required>
+        </div>
+        <input type="submit" value="Crear restaurante" class="btn btn-primary btn-outline-dark mt-3">
+    </form>
+
+    <div class="col-8 mx-auto">
+        <h2 class="text-primary">Todos los restaurantes</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Creado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurante in todos_restaurantes %}
+                <tr>
+                    <td>{{restaurante.id}}</td>
+                    <td><a href="/restaurantes/mostrar/{{restaurante.id}}">{{restaurante.nombre}}</a></td>
+                    <td>{{ restaurante.created_at.strftime("%d/%m/%Y %H:%M") }}</td>
+                    <td>
+                        <a href="/restaurantes/editar/{{restaurante.id}}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/restaurantes/borrar/{{restaurante.id}}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" class="text-muted">Todavía no hay restaurantes.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

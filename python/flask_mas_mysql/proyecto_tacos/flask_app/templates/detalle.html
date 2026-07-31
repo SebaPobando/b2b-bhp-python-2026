@@ -8,21 +8,50 @@
     <title>Detalle del taquito</title>
 </head>
 <body>
-    <a href="/" class="btn btn-info btn-outline-primary" >Inicio</a>
+    <nav class="p-3">
+        <a href="/" class="btn btn-info btn-outline-primary">Inicio</a>
+        <a href="/tacos" class="btn btn-outline-success">Todos los tacos</a>
+    </nav>
+
     <div class="d-flex justify-content-around flex-wrap p-5">
 
-
-            <div class="card col-3 ">
+            <div class="card col-4">
                 <div class="card-body">
                     <h2 class="card-title text-primary">Taco {{ taco['id'] }}</h2>
                     <p class="card-text">Tortilla: {{taco['tortilla']}}</p>
                     <p class="card-text">Guiso: {{taco['guiso']}}</p>
+                    <h3 class="card-subtitle">Salsa: {{taco['salsa']}}</h3>
+
+                    <hr>
+                    <h5>Complementos</h5>
+                    {% if taco.complementos %}
+                    <ul class="list-group mb-3">
+                        {% for complemento in taco.complementos %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="/complementos/mostrar/{{complemento.id}}">{{complemento.nombre_complemento}}</a>
+                            <a href="/complementos/quitar/{{taco.id}}/{{complemento.id}}" class="btn btn-sm btn-outline-danger">Quitar</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-muted">Este taco todavía no tiene complementos.</p>
+                    {% endif %}
+
+                    <!-- Formulario para asociar un complemento (muchos a muchos) -->
+                    <form action="/complementos/agregar/{{taco.id}}" method="post" class="d-flex gap-2">
+                        <select name="complemento_id" class="form-select" required>
+                            {% for complemento in todos_complementos %}
+                            <option value="{{complemento.id}}">{{complemento.nombre_complemento}}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Agregar" class="btn btn-primary">
+                    </form>
                 </div>
                 <div class="card-footer">
-                    <h3 class="card-subtitle">Salsa: {{taco['salsa']}}</h3>
+                    <p class="card-subtitle">Restaurante: {{taco.nombre_restaurante}}</p>
                     <p class="card-subtitle">Fecha de Creación: {{ taco['created_at'].strftime("%B %d, %Y  at %H:%M:%S") }}</p>
-                    <a href="/editar/{{taco['id']}}" class="btn btn-warning" >Editar</a>
-                    <a href="/borrar/{{taco['id']}}" class="btn btn-danger"  >Borrar</a>
+                    <a href="/editar/{{taco['id']}}" class="btn btn-warning">Editar</a>
+                    <a href="/borrar/{{taco['id']}}" class="btn btn-danger">Borrar</a>
                 </div>
             </div>
 
