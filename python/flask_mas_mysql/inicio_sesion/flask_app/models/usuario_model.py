@@ -39,34 +39,3 @@ class Usuario:
            return usuario 
        else:
            return False
-       
-    @staticmethod
-    def validar_form(data):
-        patron_letras = re.compile(r'^[^\\W\\d_]+$')
-        patron_email = re.compile(r'^[\w\.-]+@[\w\.-]+\.\w+$')
-        valid = True
-        if len(data['nombre'])<2 or not patron_letras.match(data['nombre']):
-            flash("El nombre debe ser solo letras y tener al menos 2 caracteres.","register-error") 
-            valid = False
-        if len(data['apellido'])<2 or not patron_letras.match(data['apellido']):
-            flash("El apellido debe ser solo letras y tener al menos 2 caracteres.","register-error") 
-            valid = False
-        if data['password'] != data['validpassword']:
-            flash("Las contraseñas deben coincidir.","register-error")
-            valid = False
-        if not patron_email.match(data['email']):
-            flash("El formato de correo no es válido.","register-error")
-            valid = False
-        if len(data['password'])<8:
-            flash("La contraseña debe tener almenos 8 carácteres.","register-error")
-            valid = False
-        if Usuario.buscar_por_email(data):
-            flash("El correo ya se encuentra registrado.","register-error")
-            valid = False
-        if not bool(re.search(r"\d", data['password'])):
-            flash("La contraseña debe tener almenos un número.","register-error")
-            valid = False
-        if not bool(re.search(r'[A-Z]', data['password'])):
-            flash("La contraseña debe tener almenos una mayuscula.","register-error")
-            valid = False
-        return valid
