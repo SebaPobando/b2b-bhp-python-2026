@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+}
+body{
+    background-color: lightgray;
+}
+
+nav{
+    display: flex;
+    background-color: lightgreen;
+    margin: 20px 0px;
+    justify-content: center;
+}
+
+.principal{
+    display: flex;
+    justify-content: space-around;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+}
+
+article form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.error{
+    color: red;
+}
