@@ -16,15 +16,14 @@ def crear_usuario():
     
     data = {
         "nombre": request.form['nombre'],
+        "apellido": request.form['apellido'],
         "email": request.form['email'],
         "password": pass_hasheado
     }
     
-    nuevo_id = Usuario.guardar(data) #Recibiendo el ID del nuevo Usuario
-
-    session['usuario_id'] = nuevo_id #Guardamos en sesión el id del usuario
+    nuevo_id = Usuario.save(data) 
+    session['usuario_id'] = nuevo_id 
     
-    Usuario.save(data)
     return redirect('/dashboard')
 
 @app.route('/dashboard')
