@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajero Frecuente - SIMULACRO</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <nav>
+        <h1>Viajero Frecuente</h1>
+    </nav>
+    <section class="principal">
+        <article>
+            <h2>Registro</h2>
+            
+            {% with messages = get_flashed_messages(category_filter=['registro']) %}
+                {% if messages %}
+                    {% for mensaje in messages %}
+                        <p class="error">{{mensaje}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/registrar" method="post">
+                
+                <label for="nombre">Nombre: </label>
+                <input type="text" name="nombre" id="nombre">
+                
+                <label for="apellido">Apellido: </label>
+                <input type="text" name="apellido" id="apellido">
+                
+                <label for="email">Correo: </label>
+                <input type="email" name="email" id="email">
+
+                <label for="contrasena">Contraseña: </label>
+                <input type="password" name="contrasena" id="contrasena">
+
+                <label for="contrasena2">Confirmar contraseña: </label>
+                <input type="password" name="contrasena2" id="contrasena2">
+
+                <input type="submit" value="Registrar">
+            </form>
+        </article>
+        <article>
+            <h2>Inicio de sesión</h2>
+            <form action="/login" method="post">
+                
+                <label for="email">Email: </label>
+                <input type="email" name="email">
+                
+                <label for="contrasena">Contraseña: </label>
+                <input type="password" name="contrasena">
+             
+                <input type="submit" value="Registrar">
+            </form>
+        </article>
+    </section>
+</body>
+</html>
