@@ -6,6 +6,7 @@ class Usuario:
     def __init__(self, data):
         self.id = data['id']
         self.nombre = data['nombre']
+        self.apellido = data['apellido']
         self.email = data['email']
         self.password = data['email']
         self.created_at = data['created_at']
@@ -14,7 +15,7 @@ class Usuario:
     # Guardar un nuevo registro
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO usuarios (nombre, email, created_at, updated_at) VALUES (%(nombre)s, %(email)s, NOW(), NOW());"
+        query = "INSERT INTO usuarios (nombre, apellido, email, password, created_at, updated_at) VALUES (%(nombre)s, %(apellido)s, %(email)s, %(email)s, NOW(), NOW());"
         return connectToMySQL(cls.db).query_db(query, data)
 
     # Obtener todos los registros
