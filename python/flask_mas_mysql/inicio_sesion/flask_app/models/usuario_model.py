@@ -39,3 +39,5 @@ class Usuario:
            return usuario 
        else:
            return False
+       
+    # AGREGAR MÉTODOS DE VALIDACIÓN
