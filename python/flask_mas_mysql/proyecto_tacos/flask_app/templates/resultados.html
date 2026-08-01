@@ -8,7 +8,12 @@
     <title>Tacos!</title>
 </head>
 <body>
-    <a href="/" class="btn btn-info btn-outline-primary" >Inicio</a>
+    <nav class="p-3">
+        <a href="/" class="btn btn-info btn-outline-primary">Inicio</a>
+        <a href="/restaurantes" class="btn btn-outline-primary">Restaurantes</a>
+        <a href="/complementos" class="btn btn-outline-primary">Complementos</a>
+    </nav>
+
     <div class="d-flex justify-content-around flex-wrap p-5">
 
         {% for taco in todos_tacos %}
@@ -20,7 +25,8 @@
                     <p>
                         <b>Tortilla:</b> {{taco['tortilla']}}<br>
                         <b>Guiso:</b> {{taco['guiso']}}<br>
-                        <b>Salsa:</b> {{taco['salsa']}}
+                        <b>Salsa:</b> {{taco['salsa']}}<br>
+                        <b>Restaurante:</b> {{taco.nombre_restaurante}}
                     </p>
                     <a href="/mostrar/{{taco['id']}}">
                         Ver taco
@@ -30,6 +36,8 @@
                     <p class="card-subtitle">Fecha de Creación: {{ taco['created_at'].strftime("%B %d, %Y  at %H:%M:%S") }}</p>
                 </div>
             </div>
+        {% else %}
+            <p class="text-muted">Todavía no hay tacos. <a href="/">Crea el primero</a>.</p>
         {% endfor %}
 
     </div>

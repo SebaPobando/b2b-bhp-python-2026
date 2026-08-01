@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Detalle del complemento</title>
+</head>
+<body>
+    <nav class="p-3">
+        <a href="/" class="btn btn-info btn-outline-primary">Inicio</a>
+        <a href="/complementos" class="btn btn-outline-primary">Todos los complementos</a>
+    </nav>
+
+    <div class="col-8 mx-auto my-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-primary">{{complemento.nombre_complemento}}</h2>
+                <p class="card-subtitle text-muted">
+                    Creado: {{ complemento.created_at.strftime("%d/%m/%Y %H:%M") }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="/complementos/borrar/{{complemento.id}}" class="btn btn-danger">Borrar</a>
+            </div>
+        </div>
+
+        <!-- Relación muchos a muchos: los tacos que llevan este complemento -->
+        <h3 class="mt-4">Tacos que llevan este complemento</h3>
+        <div class="d-flex flex-wrap gap-3">
+            {% for taco in complemento.en_tacos %}
+            <div class="card col-3 border">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Taco {{taco.id}}</h5>
+                    <p>
+                        <b>Tortilla:</b> {{taco.tortilla}}<br>
+                        <b>Guiso:</b> {{taco.guiso}}<br>
+                        <b>Salsa:</b> {{taco.salsa}}
+                    </p>
+                    <a href="/mostrar/{{taco.id}}">Ver taco</a>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-muted">Ningún taco lleva este complemento todavía.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
