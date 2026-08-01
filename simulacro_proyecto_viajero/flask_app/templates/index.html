@@ -13,14 +13,6 @@
     <section class="principal">
         <article>
             <h2>Registro</h2>
-            
-            {% with messages = get_flashed_messages(category_filter=['registro']) %}
-                {% if messages %}
-                    {% for mensaje in messages %}
-                        <p class="error">{{mensaje}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
 
             <form action="/registrar" method="post">
                 
@@ -39,6 +31,14 @@
                 <label for="contrasena2">Confirmar contraseña: </label>
                 <input type="password" name="contrasena2" id="contrasena2">
 
+                {% with messages = get_flashed_messages(category_filter=['registro']) %}
+                        {% if messages %}
+                            {% for mensaje in messages %}
+                                <p class="error">{{mensaje}}</p>
+                            {% endfor %}
+                        {% endif %}
+                {% endwith %}
+
                 <input type="submit" value="Registrar">
             </form>
         </article>
@@ -52,7 +52,7 @@
                 <label for="contrasena">Contraseña: </label>
                 <input type="password" name="contrasena">
              
-                <input type="submit" value="Registrar">
+                <input type="submit" value="Iniciar Sesión">
             </form>
         </article>
     </section>

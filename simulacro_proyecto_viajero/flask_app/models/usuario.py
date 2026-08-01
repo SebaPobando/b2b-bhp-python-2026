@@ -45,4 +45,23 @@ class Usuario:
             flash("Las contraseñas ingresadas no coinciden", "registro")
             es_valido = False
 
+        if Usuario.get_by_email({'email': usuario['email']}):
+            flash("El correo que quieres registrar, ya tiene un usuario vinculado. Intente otro email.", "registro")
+            es_valido = False
+
         return es_valido
+
+    @classmethod
+    def get_by_email(cls, data):
+        query = "SELECT * FROM usuarios WHERE email = %(email)s;"
+        result = connectToMySQL('esquema_viajero_frecuente').query_db(query, data)
+        if len(result) < 1:
+            return False
+        return cls(result[0])
+
+    @classmethod
+    def get_by_id(cls, data):
+        query = "SELECT * FROM usuarios WHERE id = %(id)s;"
+        result = connectToMySQL('esquema_viajero_frecuente').query_db(query, data)
+
+        return cls(result[0])

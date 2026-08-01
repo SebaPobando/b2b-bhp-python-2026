@@ -1,6 +1,9 @@
 from flask_app import app
-from flask import render_template, redirect, request, session
+from flask_bcrypt import Bcrypt
+from flask import render_template, redirect, request, session, flash
 from flask_app.models.usuario import Usuario
+
+bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
@@ -17,12 +20,41 @@ def registrar():
     if not Usuario.validar_registro(request.form):
         return redirect('/')
 
+    contrasena_hash = bcrypt.generate_password_hash(request.form['contrasena'])
+
     datos = {
         'nombre': request.form['nombre'],
         'apellido': request.form['apellido'],
         'email': request.form['email'],
-        'contrasena': request.form['contrasena'],
+        'contrasena': contrasena_hash,
     }
+
     Usuario.save(datos)
     return redirect('/registro_ok')
 
+@app.route('/dashboard')
+def dashboard():
+    print(session)
+    if 'usuario_id' not in session:
+        print("No hay usuario logeado, no se puede mostrar el dashboard")
+        return redirect('/')
+
+    usuario = Usuario.get_by_id({'id': session['usuario_id']})
+    return render_template('dashboard.html', usuario=usuario)
+
+@app.route('/login', methods=['POST'])
+def login():
+    usuario = Usuario.get_by_email({'email': request.form['email']})
+    if not usuario or not bcrypt.check_password_hash(usuario.contrasena, request.form['contrasena']):
+        flash("Credenciales no validas, intente de nuevo", "login")
+        return redirect('/')
+
+    session['usuario_id'] = usuario.id
+    session['usuario_nombre'] = usuario.nombre
+
+    return redirect('/dashboard')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
