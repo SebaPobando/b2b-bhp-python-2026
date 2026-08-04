@@ -2,6 +2,8 @@ from flask_app import app
 from flask_bcrypt import Bcrypt
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.usuario import Usuario
+from flask_app.models.viaje import Viaje
+import datetime
 
 bcrypt = Bcrypt(app)
 
@@ -40,7 +42,10 @@ def dashboard():
         return redirect('/')
 
     usuario = Usuario.get_by_id({'id': session['usuario_id']})
-    return render_template('dashboard.html', usuario=usuario)
+    viajes = Viaje.get_all_valid_trips()
+    print(viajes)
+
+    return render_template('dashboard.html', usuario=usuario, viajes=viajes)
 
 @app.route('/login', methods=['POST'])
 def login():

@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Viajero Frecuente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
+
 <body>
-   <h2>Bienvenido {{ session.usuario_nombre }}</h2>
-   <a href="/logout">Cerrar sesión</a>
+    <nav>
+        <h2>Bienvenido {{ session.usuario_nombre }}</h2>
+        <div class="botones_nav">
+            <a href="/nuevo" class="boton">Organizar Viaje</a>
+            <a href="/logout" class="boton">Cerrar Sesión</a>
+        </div>
+    </nav>
+    <main>
+        <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Destino</th>
+                    <th>Organizador</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for viaje in viajes %}
+                <tr>
+                    <td>{{ viaje.destino }}</td>
+                    <td>{{ viaje.organizador }}</td>
+                    <td>{{ viaje.fecha_inicio.strftime('%d-%m-%Y') }}</td>
+                    <td>{{ viaje.fecha_fin.strftime('%d-%m-%Y') }}</td>
+                    <td></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No hay viajes programados</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 </body>
+
 </html>
